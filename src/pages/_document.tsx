@@ -1,5 +1,5 @@
 import Document, { DocumentContext, Html, Head, Main, NextScript } from 'next/document';
-import { ServerStyleSheets } from '@material-ui/core/styles';
+import { ServerStyleSheets } from '@material-ui/styles';
 
 class MyDocument extends Document {
   render(): JSX.Element {
