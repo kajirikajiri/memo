@@ -1,15 +1,16 @@
-import '../styles/globals.css'
-import React, { useEffect } from 'react';
-import { AppProps } from 'next/app';
-import { ThemeProvider } from '@material-ui/core/styles';
-import { StylesProvider } from '@material-ui/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import theme from '../components/theme';
-import { SnackbarProvider } from 'material-ui-snackbar-provider'
+import "../styles/globals.css";
+import React, { useEffect } from "react";
+import { AppProps } from "next/app";
+import { ThemeProvider } from "@material-ui/core/styles";
+import { StylesProvider } from "@material-ui/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import theme from "../components/theme";
+import { SnackbarProvider } from "material-ui-snackbar-provider";
 
 const CustomApp = ({ Component, pageProps }: AppProps): JSX.Element => {
   useEffect(() => {
-    const jssStyles: Element | null = document.querySelector('#jss-server-side');
+    const jssStyles: Element | null =
+      document.querySelector("#jss-server-side");
     if (jssStyles) {
       jssStyles.parentElement?.removeChild(jssStyles);
     }
@@ -18,7 +19,13 @@ const CustomApp = ({ Component, pageProps }: AppProps): JSX.Element => {
   return (
     <StylesProvider injectFirst>
       <ThemeProvider theme={theme}>
-        <SnackbarProvider ButtonProps={{color: 'info'}} SnackbarProps={{autoHideDuration: 4000, anchorOrigin:  {horizontal: 'center', vertical: 'top'}}}>
+        <SnackbarProvider
+          ButtonProps={{ color: "info" }}
+          SnackbarProps={{
+            autoHideDuration: 4000,
+            anchorOrigin: { horizontal: "center", vertical: "top" },
+          }}
+        >
           <CssBaseline />
           <Component {...pageProps} />
         </SnackbarProvider>

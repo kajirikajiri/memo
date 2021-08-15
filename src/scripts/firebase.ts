@@ -19,7 +19,7 @@ const firebaseConfig = {
   storageBucket: process.env.NEXT_PUBLIC_storageBucket,
   messagingSenderId: process.env.NEXT_PUBLIC_messagingSenderId,
   appId: process.env.NEXT_PUBLIC_appId,
-  measurementId: process.env.NEXT_PUBLIC_measurementId 
+  measurementId: process.env.NEXT_PUBLIC_measurementId,
 };
 
 // Initialize Firebase
@@ -27,5 +27,5 @@ if (firebase.apps.length === 0) {
   firebase.initializeApp(firebaseConfig);
 }
 
-export const auth = firebase.auth()
-export const provider = new firebase.auth.GoogleAuthProvider()
+export const auth = firebase.auth();
+export const provider = new firebase.auth.GoogleAuthProvider();

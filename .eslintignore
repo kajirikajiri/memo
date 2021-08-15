@@ -1,0 +1,10 @@
+# don't ever lint node_modules
+node_modules
+
+# next.js
+out
+.next
+next.config.js
+
+# lint settings
+.eslintrc.js

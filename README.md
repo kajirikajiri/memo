@@ -1,8 +1,9 @@
 ## Getting Started
+
 yarn && yarn dev
 
 ## Task
 
 - [ ] lint
-- [ ] password *****
+- [ ] password **\***
 - [ ] vim editor in web ??
