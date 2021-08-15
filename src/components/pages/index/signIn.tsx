@@ -1,15 +1,22 @@
-import { Button, CircularProgress, TextField } from "@material-ui/core";
+import {
+  Button,
+  CircularProgress,
+  InputAdornment,
+  TextField,
+} from "@material-ui/core";
 import { Box } from "@material-ui/system";
 import { NextPage } from "next";
 import { useRef, useState } from "react";
 import { auth } from "../../../scripts/firebase";
 import { useRouter } from "next/router";
 import { useSnackbar } from "material-ui-snackbar-provider";
+import { Lock, NoEncryption } from "@material-ui/icons";
 
 export const SignIn: NextPage = () => {
   const router = useRouter();
   const snackbar = useSnackbar();
   const [loading, setLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
   const emailRef = useRef("");
   const passwordRef = useRef("");
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -36,6 +43,7 @@ export const SignIn: NextPage = () => {
         onSubmit={handleSubmit}
       >
         <TextField
+          fullWidth
           inputRef={emailRef}
           required
           type="email"
@@ -45,11 +53,23 @@ export const SignIn: NextPage = () => {
         <Box height={10}></Box>
 
         <TextField
+          fullWidth
           inputRef={passwordRef}
           required
-          type=""
+          type={visible ? "text" : "password"}
           label="password"
           defaultValue=""
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end" style={{ cursor: "pointer" }}>
+                {visible ? (
+                  <NoEncryption onClick={() => setVisible(!visible)} />
+                ) : (
+                  <Lock onClick={() => setVisible(!visible)} />
+                )}
+              </InputAdornment>
+            ),
+          }}
         />
         <Box height={20}></Box>
         <Button disabled={loading} fullWidth variant="contained" type="submit">

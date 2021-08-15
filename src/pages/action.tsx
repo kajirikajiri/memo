@@ -1,5 +1,9 @@
-import { Button, CircularProgress, TextField } from "@material-ui/core";
-import { CheckCircle, RadioButtonUnchecked } from "@material-ui/icons";
+import {
+  Button,
+  CircularProgress,
+  InputAdornment,
+  TextField,
+} from "@material-ui/core";
 import { Box } from "@material-ui/system";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -7,12 +11,14 @@ import { PasswordChecker } from "../components/passwordChecker";
 import { auth } from "../scripts/firebase";
 import { passwordRegex } from "../scripts/regex";
 import { useSnackbar } from "material-ui-snackbar-provider";
+import { Lock, NoEncryption } from "@material-ui/icons";
 
 const Action = () => {
   const router = useRouter();
   const snackbar = useSnackbar();
   const { oobCode } = router.query;
   const [password, setPassword] = useState("");
+  const [visible, setVisible] = useState(false);
   const [buttonLoading, setButtonLoading] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
 
@@ -75,11 +81,22 @@ const Action = () => {
             </Box>
             <TextField
               required
-              type="password"
+              type={visible ? "text" : "password"}
               label="password"
               defaultValue=""
               inputProps={{ pattern: passwordRegex }}
               onChange={handleChange}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end" style={{ cursor: "pointer" }}>
+                    {visible ? (
+                      <NoEncryption onClick={() => setVisible(!visible)} />
+                    ) : (
+                      <Lock onClick={() => setVisible(!visible)} />
+                    )}
+                  </InputAdornment>
+                ),
+              }}
             />
             <Box height={20}></Box>
             <Button

@@ -1,12 +1,18 @@
-import { Box, Button, CircularProgress, TextField } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  InputAdornment,
+  TextField,
+} from "@material-ui/core";
 import type { NextPage } from "next";
 import { auth } from "../../../scripts/firebase";
 import { useRef, useState } from "react";
-import { CheckCircle, RadioButtonUnchecked } from "@material-ui/icons";
 import { useRouter } from "next/router";
 import { PasswordChecker } from "../../passwordChecker";
 import { passwordRegex } from "../../../scripts/regex";
 import { useSnackbar } from "material-ui-snackbar-provider";
+import { Lock, NoEncryption } from "@material-ui/icons";
 
 export const SignUp: NextPage = () => {
   const router = useRouter();
@@ -14,9 +20,8 @@ export const SignUp: NextPage = () => {
   // https://stackoverflow.com/a/20461010
   // eslint-disable-next-line no-useless-escape
   const emailRegex = "[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$";
-  // https://stackoverflow.com/a/14850765
-  // 数値小文字大文字8文字以上
   const [loading, setLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
   const [passwordFocus, setPasswordFocus] = useState(false);
   const [password, setPassword] = useState("");
   const emailRef = useRef("");
@@ -52,6 +57,7 @@ export const SignUp: NextPage = () => {
       onSubmit={handleSubmit}
     >
       <TextField
+        fullWidth
         inputRef={emailRef}
         required
         type="email"
@@ -60,16 +66,28 @@ export const SignUp: NextPage = () => {
         inputProps={{ pattern: emailRegex }}
       />
       <Box height={10}></Box>
-      <PasswordChecker password={password} />
+      {passwordFocus && <PasswordChecker password={password} />}
       <TextField
+        fullWidth
         inputRef={passwordRef}
         required
-        type="password"
         label="password"
         defaultValue=""
+        type={visible ? "text" : "password"}
         inputProps={{ pattern: passwordRegex }}
         onFocus={() => setPasswordFocus(true)}
         onChange={handleChange}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end" style={{ cursor: "pointer" }}>
+              {visible ? (
+                <NoEncryption onClick={() => setVisible(!visible)} />
+              ) : (
+                <Lock onClick={() => setVisible(!visible)} />
+              )}
+            </InputAdornment>
+          ),
+        }}
       />
       <Box height={20}></Box>
       <Button disabled={loading} fullWidth variant="contained" type="submit">
