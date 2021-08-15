@@ -10,19 +10,21 @@ export const Layout: NextPage = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (auth.currentUser) {
-      if (router.pathname === "/") {
-        router.push("/dashboard");
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        if (router.pathname === "/") {
+          router.push("/dashboard");
+        } else {
+          setLoading(false);
+        }
       } else {
-        setLoading(false);
+        if (router.pathname === "/") {
+          setLoading(false);
+        } else {
+          router.push("/");
+        }
       }
-    } else {
-      if (router.pathname === "/") {
-        setLoading(false);
-      } else {
-        router.push("/");
-      }
-    }
+    });
   }, []);
   return (
     <>
