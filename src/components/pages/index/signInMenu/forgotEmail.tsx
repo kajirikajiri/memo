@@ -3,7 +3,7 @@ import { Box } from "@material-ui/system";
 import { useSnackbar } from "material-ui-snackbar-provider";
 import { NextPage } from "next";
 import { useRef, useState } from "react";
-import { auth } from "../../../scripts/firebase";
+import { auth } from "../../../../scripts/firebase";
 
 interface Props {
   handleClose: () => Promise<void>;
@@ -12,7 +12,6 @@ export const ForgotEmail: NextPage<Props> = ({ handleClose }) => {
   const snackbar = useSnackbar();
   const [loading, setLoading] = useState(false);
   const emailRef = useRef("");
-  const passwordRef = useRef("");
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setLoading(true);
     try {
@@ -28,8 +27,8 @@ export const ForgotEmail: NextPage<Props> = ({ handleClose }) => {
       // エラーを握りつぶす
     } finally {
       snackbar.showMessage("メールを送信しました", "close", () => null);
-      setLoading(false);
       handleClose();
+      setTimeout(() => setLoading(false), 3000);
     }
   };
   return (

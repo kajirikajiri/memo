@@ -3,7 +3,6 @@ import { Box } from "@material-ui/system";
 import { useSnackbar } from "material-ui-snackbar-provider";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { Layout } from "../../components/layout";
 import { auth } from "../../scripts/firebase";
 
 const Dashboard = () => {
@@ -26,18 +25,15 @@ const Dashboard = () => {
     }
   };
   return (
-    <Layout>
-      <Box display="flex" justifyContent="flex-end" width="100%">
-        <Button onClick={handleSignOut}>
-          {buttonLoading ? (
-            <CircularProgress size={20}></CircularProgress>
-          ) : (
-            "ログアウト"
-          )}
-        </Button>
-      </Box>
-      dashboard
-    </Layout>
+    <Box display="flex" justifyContent="flex-end" width="100%">
+      <Button onClick={handleSignOut}>
+        {buttonLoading ? (
+          <CircularProgress size={20}></CircularProgress>
+        ) : (
+          "ログアウト"
+        )}
+      </Button>
+    </Box>
   );
 };
 

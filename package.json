@@ -8,9 +8,9 @@
     "eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "start": "next start",
     "prepare": "husky install",
-    "prettier": "prettier --write --ignore-unknown",
     "lint": "next lint",
-    "lints": "yarn lint && yarn eslint && yarn prettier"
+    "lints": "yarn lint && yarn eslint && yarn prettier --write .",
+    "lint-staged": "yarn lint && yarn eslint && prettier --write --ignore-unknown"
   },
   "lint-staged": {
     "**/*": "yarn lints"

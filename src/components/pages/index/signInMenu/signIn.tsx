@@ -6,13 +6,18 @@ import {
 } from "@material-ui/core";
 import { Box } from "@material-ui/system";
 import { NextPage } from "next";
-import { useRef, useState } from "react";
-import { auth } from "../../../scripts/firebase";
+import { Dispatch, SetStateAction, useRef, useState } from "react";
+import { auth } from "../../../../scripts/firebase";
 import { useRouter } from "next/router";
 import { useSnackbar } from "material-ui-snackbar-provider";
 import { Lock, NoEncryption } from "@material-ui/icons";
+import firebase from "firebase";
 
-export const SignIn: NextPage = () => {
+interface Props {
+  setUser: Dispatch<SetStateAction<firebase.User | undefined>>;
+}
+
+export const SignIn: NextPage<Props> = ({ setUser }) => {
   const router = useRouter();
   const snackbar = useSnackbar();
   const [loading, setLoading] = useState(false);
@@ -26,11 +31,11 @@ export const SignIn: NextPage = () => {
       const email = (emailRef.current as any).value;
       const password = (passwordRef.current as any).value;
       const { user } = await auth.signInWithEmailAndPassword(email, password);
-      user && router.push("/dashboard");
+      user && setUser(user);
     } catch (_) {
-      snackbar.showMessage("登録に失敗しました", "close", () => null);
+      snackbar.showMessage("ログインに失敗しました", "close", () => null);
     } finally {
-      setLoading(false);
+      setTimeout(() => setLoading(false), 5000);
     }
   };
   return (

@@ -17,7 +17,7 @@ const CustomApp = ({ Component, pageProps }: AppProps): JSX.Element => {
   }, []);
 
   return (
-    <StylesProvider injectFirst>
+    <StylesProvider>
       <ThemeProvider theme={theme}>
         <SnackbarProvider
           ButtonProps={{ color: "info" }}
