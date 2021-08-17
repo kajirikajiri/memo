@@ -11,6 +11,21 @@ const Home: NextPage = () => {
   useEffect(() => {
     auth.onAuthStateChanged((user) => user && setUser(user));
   }, []);
+  const handleSubmit = () => {
+    fetch("http://localhost:4000/scrap", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: "hello",
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(1, data))
+      .catch((e) => console.log(2, e));
+  };
   return (
     <Box
       display="flex"

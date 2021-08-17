@@ -4,6 +4,7 @@ yarn && yarn dev
 
 ## Task
 
-- [ ] lint
-- [ ] password **\***
-- [ ] vim editor in web ??
+- [x] lint
+- [x] password **\***
+- [x] vim editor in web ??
+- [ ] kajirikajiri/memo/src/pages/index.tsx の handleSubmit でエンドポイントと通信
