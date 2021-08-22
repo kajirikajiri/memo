@@ -5,6 +5,10 @@ node_modules
 out
 .next
 
+# other
+yarn.lock
+.prettierignore
+
 # https://prettier.io/docs/en/install.html
 # Another tip! If your project isn’t ready to format, say, HTML files yet, add *.html.
 *.html
