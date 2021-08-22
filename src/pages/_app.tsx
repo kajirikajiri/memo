@@ -20,7 +20,7 @@ const CustomApp = ({ Component, pageProps }: AppProps): JSX.Element => {
   const client = new ApolloClient({
     uri:
       process.env.NODE_ENV === "production"
-        ? "https://sample-1912224381.ap-northeast-1.elb.amazonaws.com/graphql"
+        ? "http://sample-1912224381.ap-northeast-1.elb.amazonaws.com/graphql"
         : "http://localhost:4000/graphql",
     cache: new InMemoryCache(),
   });
