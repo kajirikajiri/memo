@@ -1,31 +1,21 @@
-import { Box } from "@material-ui/core";
+import { Box, CircularProgress } from "@material-ui/core";
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import SignInMenu from "../components/pages/index/signInMenu";
 import firebase from "firebase";
 import { AccountCircle } from "@material-ui/icons";
 import { auth } from "../scripts/firebase";
+import { AccountMenu } from "../components/pages/index/accountMenu";
 
 const Home: NextPage = () => {
+  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<firebase.User>();
   useEffect(() => {
-    auth.onAuthStateChanged((user) => user && setUser(user));
+    auth.onAuthStateChanged((user) => {
+      user && setUser(user);
+      setLoading(false);
+    });
   }, []);
-  const handleSubmit = () => {
-    fetch("http://localhost:4000/scrap", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: "hello",
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(1, data))
-      .catch((e) => console.log(2, e));
-  };
   return (
     <Box
       display="flex"
@@ -35,7 +25,15 @@ const Home: NextPage = () => {
       alignItems="center"
     >
       <Box width="100%" display="flex" justifyContent="flex-end">
-        {user ? <AccountCircle /> : <SignInMenu setUser={setUser} />}
+        {(() => {
+          if (loading)
+            return <CircularProgress size={20} style={{ margin: 5 }} />;
+          if (user) {
+            return <AccountMenu />;
+          } else {
+            return <SignInMenu setUser={setUser} />;
+          }
+        })()}
       </Box>
     </Box>
   );
