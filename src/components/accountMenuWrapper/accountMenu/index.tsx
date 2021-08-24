@@ -1,6 +1,5 @@
 import { AccountCircle } from "@material-ui/icons";
 import { useState } from "react";
-import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { IconButton } from "@material-ui/core";
@@ -19,6 +18,7 @@ export const AccountMenu = () => {
   return (
     <>
       <IconButton
+        style={{ padding: 0 }}
         aria-controls="simple-menu"
         aria-haspopup="true"
         onClick={handleClick}
@@ -33,6 +33,9 @@ export const AccountMenu = () => {
         onClose={handleClose}
       >
         <MenuItem onClick={() => router.push("/scraps")}>Scrap一覧</MenuItem>
+        <MenuItem onClick={() => router.push("/scraps/new")}>
+          Scrap作成
+        </MenuItem>
       </Menu>
     </>
   );

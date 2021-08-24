@@ -3,7 +3,7 @@ import { Box } from "@material-ui/system";
 import { useSnackbar } from "material-ui-snackbar-provider";
 import { NextPage } from "next";
 import { useRef, useState } from "react";
-import { auth } from "../../../../scripts/firebase";
+import { auth } from "../../../scripts/firebase";
 
 interface Props {
   handleClose: () => Promise<void>;

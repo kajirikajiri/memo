@@ -7,7 +7,7 @@ import {
 import { Box } from "@material-ui/system";
 import { NextPage } from "next";
 import { Dispatch, SetStateAction, useRef, useState } from "react";
-import { auth } from "../../../../scripts/firebase";
+import { auth } from "../../../scripts/firebase";
 import { useRouter } from "next/router";
 import { useSnackbar } from "material-ui-snackbar-provider";
 import { Lock, NoEncryption } from "@material-ui/icons";

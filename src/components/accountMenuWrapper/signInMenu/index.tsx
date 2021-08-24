@@ -9,7 +9,7 @@ import {
   MenuItem,
 } from "@material-ui/core";
 import type { NextPage } from "next";
-import { provider } from "../../../../scripts/firebase";
+import { provider } from "../../../scripts/firebase";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import firebase from "firebase";
 import { SignUp } from "./signUp";
@@ -40,7 +40,7 @@ interface Props {
   setUser: Dispatch<SetStateAction<firebase.User | undefined>>;
 }
 
-const SignInMenu: NextPage<Props> = ({ setUser }) => {
+export const SignInMenu: NextPage<Props> = ({ setUser }) => {
   const classes = useStyles();
   const router = useRouter();
   const snackbar = useSnackbar();
@@ -119,7 +119,7 @@ const SignInMenu: NextPage<Props> = ({ setUser }) => {
   return (
     <>
       <Box>
-        <Button onClick={handleClickMenu}>
+        <Button style={{ padding: 0 }} onClick={handleClickMenu}>
           {isSignIn ? "ログイン" : "登録"}
         </Button>
         <Menu
@@ -161,5 +161,3 @@ const SignInMenu: NextPage<Props> = ({ setUser }) => {
     </>
   );
 };
-
-export default SignInMenu;

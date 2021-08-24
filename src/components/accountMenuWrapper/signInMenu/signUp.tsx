@@ -6,11 +6,11 @@ import {
   TextField,
 } from "@material-ui/core";
 import type { NextPage } from "next";
-import { auth } from "../../../../scripts/firebase";
+import { auth } from "../../../scripts/firebase";
 import { Dispatch, SetStateAction, useRef, useState } from "react";
 import { useRouter } from "next/router";
-import { PasswordChecker } from "../../../passwordChecker";
-import { passwordRegex } from "../../../../scripts/regex";
+import { PasswordChecker } from "../../passwordChecker";
+import { passwordRegex } from "../../../scripts/regex";
 import { useSnackbar } from "material-ui-snackbar-provider";
 import { Lock, NoEncryption } from "@material-ui/icons";
 import firebase from "firebase";
