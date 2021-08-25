@@ -1,18 +1,12 @@
 import { TextField } from "@material-ui/core";
 import { Box } from "@material-ui/system";
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  useQuery,
-  gql,
-  useMutation,
-} from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { auth } from "../../../scripts/firebase";
 import firebase from "firebase";
 import { useSnackbar } from "material-ui-snackbar-provider";
+import { AccountMenuLayout } from "../../../components/layout/accountMenuLayout";
 
 const CREATE_SCRAP = gql`
   mutation CreateScrap($userId: String!, $title: String!) {
@@ -48,23 +42,25 @@ const ScrapNew = () => {
     }
   };
   return (
-    <Box display="flex" justifyContent="center" width="100%">
-      <Box>
+    <AccountMenuLayout>
+      <Box display="flex" justifyContent="center" width="100%">
         <Box>
-          <Box>enter: next line</Box>
-          <Box>ctrl+enter: submit</Box>
+          <Box>
+            <Box>enter: next line</Box>
+            <Box>ctrl+enter: submit</Box>
+          </Box>
+          <TextField
+            autoFocus
+            inputRef={textFieldRef}
+            multiline
+            required
+            type="text"
+            defaultValue=""
+            onKeyDown={handleSubmit}
+          ></TextField>
         </Box>
-        <TextField
-          autoFocus
-          inputRef={textFieldRef}
-          multiline
-          required
-          type="text"
-          defaultValue=""
-          onKeyDown={handleSubmit}
-        ></TextField>
       </Box>
-    </Box>
+    </AccountMenuLayout>
   );
 };
 

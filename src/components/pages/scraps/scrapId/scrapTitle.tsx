@@ -16,6 +16,5 @@ export const ScrapTitle = () => {
   const router = useRouter();
   const { scrapId } = router.query;
   const { data, loading } = useQuery(SCRAP, { variables: { id: scrapId } });
-  console.log(data);
   return <>{loading ? <CircularProgress /> : <>{data.scrap.title}</>}</>;
 };

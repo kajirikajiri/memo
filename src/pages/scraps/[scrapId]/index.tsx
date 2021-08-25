@@ -3,7 +3,7 @@ import { TextField } from "@material-ui/core";
 import gql from "graphql-tag";
 import { useSnackbar } from "material-ui-snackbar-provider";
 import { useRouter } from "next/router";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { AccountMenuLayout } from "../../../components/layout/accountMenuLayout";
 import { ScrapList } from "../../../components/pages/scraps/scrapId/scrapList";
 import { ScrapTitle } from "../../../components/pages/scraps/scrapId/scrapTitle";
@@ -37,7 +37,7 @@ const ScrapId = () => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
   };
-  const handleSubmit = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (!createLoading && e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
       try {
         if (!(text.length >= 1)) {
@@ -67,7 +67,7 @@ const ScrapId = () => {
           type="text"
           defaultValue=""
           value={text}
-          onKeyDown={handleSubmit}
+          onKeyDown={handleKeyDown}
         />
       }
     </AccountMenuLayout>

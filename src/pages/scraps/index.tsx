@@ -11,6 +11,7 @@ import { Box } from "@material-ui/system";
 import gql from "graphql-tag";
 import { useRouter } from "next/router";
 import { FixedSizeList, ListChildComponentProps } from "react-window";
+import { AccountMenuLayout } from "../../components/layout/accountMenuLayout";
 
 const SCRAPS = gql`
   {
@@ -66,22 +67,24 @@ const Scraps = () => {
     );
   }
   return (
-    <Box width="100%" display="flex" justifyContent="center">
-      {loading ? (
-        <CircularProgress size={30} />
-      ) : (
-        <Paper id="my-paper" style={{ marginTop: 20 }}>
-          <FixedSizeList
-            height={250}
-            width={300}
-            itemSize={46}
-            itemCount={data.scraps.length}
-          >
-            {renderRow}
-          </FixedSizeList>
-        </Paper>
-      )}
-    </Box>
+    <AccountMenuLayout>
+      <Box width="100%" display="flex" justifyContent="center">
+        {loading ? (
+          <CircularProgress size={30} />
+        ) : (
+          <Paper id="my-paper" style={{ marginTop: 20 }}>
+            <FixedSizeList
+              height={250}
+              width={300}
+              itemSize={46}
+              itemCount={data.scraps.length}
+            >
+              {renderRow}
+            </FixedSizeList>
+          </Paper>
+        )}
+      </Box>
+    </AccountMenuLayout>
   );
 };
 
