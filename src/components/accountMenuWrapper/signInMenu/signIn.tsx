@@ -32,6 +32,7 @@ export const SignIn: NextPage<Props> = ({ setUser }) => {
       const password = (passwordRef.current as any).value;
       const { user } = await auth.signInWithEmailAndPassword(email, password);
       user && setUser(user);
+      snackbar.showMessage("ログインに成功しました", "close", () => null);
     } catch (_) {
       snackbar.showMessage("ログインに失敗しました", "close", () => null);
     } finally {

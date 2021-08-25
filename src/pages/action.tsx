@@ -40,7 +40,13 @@ const Action = () => {
         auth
           .confirmPasswordReset(oobCode, password)
           .then(function () {
-            router.push("/?pageState=signIn&dialogState=email");
+            snackbar.showMessage(
+              "成功しました。ログイン画面に自動で移動します。",
+              "close"
+            );
+            setTimeout(() => {
+              router.push("/?pageState=signIn&dialogState=email");
+            }, 1500);
           })
           .catch(function () {
             errorSnackbar();
@@ -51,7 +57,9 @@ const Action = () => {
     } catch (e) {
       errorSnackbar();
     } finally {
-      setButtonLoading(false);
+      setTimeout(() => {
+        setButtonLoading(false);
+      }, 3000);
     }
   };
   const handleChange = async (

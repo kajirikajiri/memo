@@ -5,12 +5,16 @@ import { NextPage } from "next";
 
 const useStyles = makeStyles({
   activatedFont: {
+    width: 40,
+    textAlign: "center",
     color: "#1976d2",
     fontSize: "24px",
     fontWeight: "bold",
     letterSpacing: "5px",
   },
   whiteOutFont: {
+    width: 40,
+    textAlign: "center",
     display: "inline-block",
     color: "#ffffff",
     fontSize: "14pt",
