@@ -19,7 +19,7 @@ export const AccountMenuWrapper: NextPage<Props> = ({
   return (
     <>
       {(() => {
-        if (loading) return <CircularProgress size={24} />;
+        if (loading) return <CircularProgress size={34} />;
         if (user) {
           return <AccountMenu setUser={setUser} />;
         } else {

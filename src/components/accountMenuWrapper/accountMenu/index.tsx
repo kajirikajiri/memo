@@ -47,7 +47,7 @@ export const AccountMenu: NextPage<Props> = ({ setUser }) => {
         aria-haspopup="true"
         onClick={handleClick}
       >
-        <AccountCircle />
+        <AccountCircle fontSize="large" />
       </IconButton>
       <Menu
         id="simple-menu"
