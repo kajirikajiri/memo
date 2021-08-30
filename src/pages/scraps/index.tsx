@@ -1,16 +1,9 @@
 import { useMutation, useQuery } from "@apollo/client";
-import {
-  CircularProgress,
-  IconButton,
-  ListItem,
-  ListItemText,
-  Paper,
-} from "@material-ui/core";
+import { Button, CircularProgress, IconButton, Paper } from "@material-ui/core";
 import { Delete } from "@material-ui/icons";
 import { Box } from "@material-ui/system";
 import gql from "graphql-tag";
 import { useRouter } from "next/router";
-import { FixedSizeList, ListChildComponentProps } from "react-window";
 import { AccountMenuLayout } from "../../components/layout/accountMenuLayout";
 
 const SCRAPS = gql`
@@ -22,66 +15,41 @@ const SCRAPS = gql`
   }
 `;
 
-const REMOVE_SCRAP = gql`
-  mutation Remove($id: String!) {
-    removeScrap(id: $id) {
-      id
-    }
-  }
-`;
-
 const Scraps = () => {
-  const { data, loading, refetch } = useQuery(SCRAPS);
+  const { data, loading } = useQuery(SCRAPS);
   const router = useRouter();
-  const [removeScrap] = useMutation(REMOVE_SCRAP);
-  const handleClick = async (
-    event: React.MouseEvent<HTMLButtonElement>,
-    id: string
-  ) => {
-    event.stopPropagation();
-    if (confirm("削除？")) {
-      const { data } = await removeScrap({ variables: { id } });
-      if (typeof data.removeScrap.id === "string") refetch();
-    }
-  };
-  function renderRow(props: ListChildComponentProps) {
-    const { index, style } = props;
 
-    return (
-      <ListItem
-        button
-        onClick={() => router.push(`/scraps/${data.scraps[index].id}`)}
-        style={{ ...style, ...{ borderBottom: "1px solid lightgrey" } }}
-        key={index}
-      >
-        <ListItemText primary={`${data.scraps[index].title}`} />
-        <IconButton
-          id={`my-icon-button-${index}`}
-          aria-controls="simple-menu"
-          aria-haspopup="true"
-          onClick={(e) => handleClick(e, data.scraps[index].id)}
-        >
-          <Delete />
-        </IconButton>
-      </ListItem>
-    );
-  }
   return (
     <AccountMenuLayout>
       <Box width="100%" display="flex" justifyContent="center">
         {loading ? (
           <CircularProgress size={30} />
         ) : (
-          <Paper id="my-paper" style={{ marginTop: 20 }}>
-            <FixedSizeList
-              height={250}
-              width={300}
-              itemSize={46}
-              itemCount={data.scraps.length}
-            >
-              {renderRow}
-            </FixedSizeList>
-          </Paper>
+          <Box
+            display="flex"
+            alignItems="center"
+            width="100%"
+            padding={2}
+            maxWidth={450}
+            flexDirection="column"
+          >
+            {data.scraps.map((scrap: any) => {
+              return (
+                <Box marginBottom={2} width="100%">
+                  <Button
+                    fullWidth
+                    variant="outlined"
+                    color="inherit"
+                    onClick={() => router.push(`/scraps/${scrap.id}`)}
+                    key={scrap.id}
+                    style={{ textTransform: "none" }}
+                  >
+                    {scrap.title}
+                  </Button>
+                </Box>
+              );
+            })}
+          </Box>
         )}
       </Box>
     </AccountMenuLayout>
