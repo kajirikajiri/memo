@@ -88,7 +88,7 @@ const ScrapId = () => {
         </Box>
         <Box paddingX={3}>
           <Box
-            marginTop={4}
+            marginTop={6}
             marginBottom={7}
             display="flex"
             alignItems="center"
